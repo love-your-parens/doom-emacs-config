@@ -9,10 +9,19 @@
 ;; (setq fancy-splash-image (concat doom-user-dir "splash/doomEmacs.svg"))
 
 ;; Keybindings
-;;; Paredit
+;; Paredit
 (global-set-key (kbd "S-<down>") #'sp-up-sexp)
 (global-set-key (kbd "S-<up>") #'sp-backward-up-sexp)
-(global-set-key (kbd "S-<right>") #'sp-forward-slurp-sexp)
-(global-set-key (kbd "S-<left>") #'sp-backward-slurp-sexp)
-(global-set-key (kbd "C-M-,") #'sp-backward-barf-sexp)
-(global-set-key (kbd "C-M-.") #'sp-forward-barf-sexp)
+(global-set-key (kbd "C-M-,") #'sp-backward-slurp-sexp)
+(global-set-key (kbd "C-M-.") #'sp-forward-slurp-sexp)
+(global-set-key (kbd "C-M-<return>") #'cider-eval-sexp-at-point)
+
+;; CIDER
+(map! :after cider
+      :map clojure-mode-map
+      "<backtab>" #'cider-format-defun)
+
+(map! :after cider
+      :map clojure-mode-map
+      :localleader
+      "e s" #'cider-eval-sexp-at-point)
