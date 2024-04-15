@@ -25,3 +25,14 @@
       :map clojure-mode-map
       :localleader
       "e s" #'cider-eval-sexp-at-point)
+
+;; PHP
+(map! :after php-mode
+      :map php-mode-map
+      :leader
+      "c f" #'lsp-format-buffer
+      "c F" #'lsp-format-region)
+
+;; LSP
+;;; INTELEPHENSE license key
+(setq lsp-intelephense-licence-key "")
