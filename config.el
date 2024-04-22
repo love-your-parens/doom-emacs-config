@@ -8,7 +8,20 @@
 ;; Doom splash screen logo
 ;; (setq fancy-splash-image (concat doom-user-dir "splash/doomEmacs.svg"))
 
-;; Keybindings
+;; Editor functionality
+(defun window-next-enlargen ()
+  (interactive)
+  (evil-window-next nil)
+  (doom/window-enlargen)
+  (evil-scroll-left 2))
+
+;;; Keybindings
+;; Editor
+(map! :leader "w O" #'window-next-enlargen)
+(map! "M-<left>" #'evil-backward-word-end)
+(map! "M-<right>" #'evil-forward-word-begin)
+(map! "M-<backspace>" #'evil-delete-backward-word)
+
 ;; Paredit
 (global-set-key (kbd "S-<down>") #'sp-up-sexp)
 (global-set-key (kbd "S-<up>") #'sp-backward-up-sexp)
