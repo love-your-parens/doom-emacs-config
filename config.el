@@ -22,17 +22,20 @@
 (map! "M-<right>" #'evil-forward-word-begin)
 (map! "M-<backspace>" #'evil-delete-backward-word)
 
-;; Paredit
-(global-set-key (kbd "S-<down>") #'sp-up-sexp)
-(global-set-key (kbd "S-<up>") #'sp-backward-up-sexp)
-(global-set-key (kbd "C-M-,") #'sp-backward-slurp-sexp)
-(global-set-key (kbd "C-M-.") #'sp-forward-slurp-sexp)
-(global-set-key (kbd "C-M-<return>") #'cider-eval-sexp-at-point)
+;; Structural editing
+(map! "S-<down>" #'sp-up-sexp)
+(map! "S-<up>" #'sp-backward-up-sexp)
+(map! "C-M-," #'sp-backward-slurp-sexp)
+(map! "C-M-." #'sp-forward-slurp-sexp)
+(map! "M-9" #'sp-wrap-round)
+(map! "M-[" #'sp-wrap-square)
+(map! "M-{" #'sp-wrap-curly)
 
 ;; CIDER
 (map! :after cider
       :map clojure-mode-map
-      "<backtab>" #'cider-format-defun)
+      "<backtab>" #'cider-format-defun
+      "C-M-<return>" #'cider-eval-sexp-at-point)
 
 (map! :after cider
       :map clojure-mode-map
