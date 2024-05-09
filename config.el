@@ -31,6 +31,13 @@
 (map! "M-[" #'sp-wrap-square)
 (map! "M-{" #'sp-wrap-curly)
 
+;; DAP Debugging
+(map! :leader
+      (:prefix ("d" . "debugging")
+       :desc "Toggle breakpoint" "t" #'dap-breakpoint-toggle
+       :desc "Start debugging" "d" #'dap-debug
+       :desc "Stop debugging" "c" #'dap-disconnect))
+
 ;; CIDER
 (map! :after cider
       :map clojure-mode-map
