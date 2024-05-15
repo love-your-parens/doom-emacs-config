@@ -1,4 +1,10 @@
-(setq doom-font (font-spec :size 15))
+(setq doom-font (font-spec :family "Iosevka Nerd Font"
+                           :size 16
+                           :weight 'regular)
+      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 24)
+      doom-serif-font (font-spec :family "Iosevka Slab")
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" 
+                                          :weight 'regular))
 
 ;; Resize & reposition the window in GUI mode:
 (when window-system
@@ -14,6 +20,16 @@
   (evil-window-next nil)
   (doom/window-enlargen)
   (evil-scroll-left 2))
+
+(defun eval-and-replace ()
+  "Replace the preceding sexp with its value."
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+      (prin1 (eval (read (current-kill 0)))
+             (current-buffer))
+    (error (message "Invalid expression")
+           (insert (current-kill 0)))))
 
 ;;; Keybindings
 ;; Editor
