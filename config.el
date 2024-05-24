@@ -72,6 +72,8 @@
       "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
 
+(add-hook 'php-mode-hook 'lsp-headerline-breadcrumb-mode)
+
 ;; LSP
 ;;; INTELEPHENSE license key
 (setq lsp-intelephense-licence-key "")
