@@ -31,12 +31,18 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
+(defun backward-same-syntax ()
+  (interactive)
+  (let ((current-prefix-arg (* -1 (or current-prefix-arg 1))))
+    (call-interactively #'forward-same-syntax)))
+
 ;;; Keybindings
 ;; Editor
+(map! :nvi "M-<left>" #'backward-same-syntax)
+(map! :nvi "M-<right>" #'forward-same-syntax)
 (map! :leader "w O" #'window-next-enlargen)
-(map! "M-<left>" #'evil-backward-word-end)
-(map! "M-<right>" #'evil-forward-word-begin)
 (map! "M-<backspace>" #'evil-delete-backward-word)
+(map! "C-\"" #'paredit-doublequote)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
