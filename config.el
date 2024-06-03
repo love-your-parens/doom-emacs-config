@@ -31,10 +31,9 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-(defun backward-same-syntax ()
-  (interactive)
-  (let ((current-prefix-arg (* -1 (or current-prefix-arg 1))))
-    (call-interactively #'forward-same-syntax)))
+(defun backward-same-syntax (arg)
+  (interactive "^p")
+  (forward-same-syntax (- (or arg 1))))
 
 ;;; Keybindings
 ;; Editor
