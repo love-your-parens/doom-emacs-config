@@ -101,6 +101,11 @@
       :localleader
       "e s" #'cider-eval-sexp-at-point)
 
+(map! :map clojure-mode-map
+      :leader
+      "c f" #'lsp-format-buffer
+      "c F" #'lsp-format-region)
+
 
 ;; PHP
 (map! :after php-mode
