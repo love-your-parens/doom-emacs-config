@@ -1,35 +1,28 @@
-(setq doom-font (font-spec :family "Iosevka Nerd Font"
-                           :size 16
-                           :weight 'regular)
-      doom-big-font (font-spec :family "Iosevka Nerd Font" :size 24)
-      doom-serif-font (font-spec :family "Iosevka Slab")
-      doom-variable-pitch-font (font-spec :family "Iosevka Aile" 
-                                          :weight 'regular))
+;;; shared-config.el -*- lexical-binding: t; -*-
+
+;;; Workstation-agnostic, version-controlled, universal settings.
+
+
+;; Here are some settings specific to workstation and environment,
+;; which you'll want to put in the main configuration file instead.
+;;
+;; (add-to-list 'default-frame-alist '(width . 80))
+;; (add-to-list 'default-frame-alist '(height . 40))
+;;
+;; (setq fancy-splash-image (concat doom-user-dir "splash/emacs.svg"))
 
 
 ;;; General settings
+(setq display-line-numbers-type 'relative)
 (after! treemacs (treemacs-follow-mode 1))
 
-;; Display
-(setq default-frame-width 150)
-(setq default-frame-height 60)
-
 ;; LSP
-(setenv "LSP_USE_PLISTS" "true")
+(setenv "LSP_USE_PLISTS" "true") ; performance
 (setq lsp-headerline-breadcrumb-enable t
-      lsp-intelephense-licence-key ""
       lsp-file-watch-threshold nil)
 
 
 ;;; Editor functionality
-(defun set-default-frame-size-and-position (&optional frame)
-  (set-frame-size frame
-                  default-frame-width
-                  default-frame-height)
-  (modify-frame-parameters frame
-                           '((left . 0.5)
-                             (top . 0.5))))
-
 (let ((decorated t))
   (defun toggle-frame-decoration (&optional frame)
     "Toggles frame decoration on/off."
@@ -113,10 +106,3 @@
       :leader
       "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
-
-
-;;; Frame setup.
-(when window-system
-  (set-default-frame-size-and-position)
-  (add-hook 'after-make-frame-functions
-            #'set-default-frame-size-and-position))
