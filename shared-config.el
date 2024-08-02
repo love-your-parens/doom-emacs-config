@@ -23,6 +23,14 @@
 
 
 ;;; Editor functionality
+(defun center-frame (&optional frame)
+  "Puts the selected frame in the middle of the screen."
+  (interactive)
+  (when window-system
+    (modify-frame-parameters frame
+                             '((left . 0.5)
+                               (right . 0.5)))))
+
 (let ((decorated t))
   (defun toggle-frame-decoration (&optional frame)
     "Toggles frame decoration on/off."
@@ -54,6 +62,8 @@
   (interactive "^p")
   (forward-same-syntax (- (or arg 1))))
 
+;;; Hooks
+(add-hook 'after-make-frame-functions #'center-frame)
 
 ;;; Keybindings
 ;; Editor
