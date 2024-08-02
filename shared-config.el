@@ -6,9 +6,17 @@
 ;; Here are some settings specific to workstation and environment,
 ;; which you'll want to put in the main configuration file instead.
 ;;
-;; (add-to-list 'default-frame-alist '(width . 80))
+;; Initial frame size & position:
+;; (add-to-list 'initial-frame-alist '(width . 120))
+;; (add-to-list 'initial-frame-alist '(height . 40))
+;; (add-to-list 'initial-frame-alist '(left . 0.5))
+;; (add-to-list 'initial-frame-alist '(top . 0.5))
+;;
+;; Subsequent frames:
+;; (add-to-list 'default-frame-alist '(width . 120))
 ;; (add-to-list 'default-frame-alist '(height . 40))
 ;;
+;; Splash ASCII-art replacement:
 ;; (setq fancy-splash-image (concat doom-user-dir "splash/emacs.svg"))
 
 
@@ -41,6 +49,15 @@
                                      (top . 0.5))))
     (setq decorated (not decorated))))
 
+(defun set-default-frame-size (&optional frame)
+  "Sets the frame size to default dimensions.
+   Acts only if both default width and height have been configured."
+  (interactive)
+  (when window-system
+    (when-let ((width (cdr (assq 'width default-frame-alist))))
+      (when-let ((height (cdr (assq 'height default-frame-alist))))
+        (set-frame-size frame width height)))))
+
 (defun window-next-enlargen ()
   "Switches to the next window and enlarges it."
   (interactive)
@@ -62,8 +79,6 @@
   (interactive "^p")
   (forward-same-syntax (- (or arg 1))))
 
-;;; Hooks
-(add-hook 'after-make-frame-functions #'center-frame)
 
 ;;; Keybindings
 ;; Editor
