@@ -29,7 +29,7 @@
   (when window-system
     (modify-frame-parameters frame
                              '((left . 0.5)
-                               (right . 0.5)))))
+                               (top . 0.5)))))
 
 (let ((decorated t))
   (defun toggle-frame-decoration (&optional frame)
