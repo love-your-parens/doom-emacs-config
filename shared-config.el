@@ -93,8 +93,10 @@
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
 (map! "S-<up>" #'sp-backward-down-sexp)
-(map! "C-M-," #'sp-backward-slurp-sexp)
+(map! "C-M-," #'sp-forward-barf-sexp)
 (map! "C-M-." #'sp-forward-slurp-sexp)
+(map! "S-M-<up>" #'sp-raise-sexp)
+(map! "S-M-<down>" #'sp-splice-sexp)
 (map! "M-9" #'sp-wrap-round)
 (map! "M-[" #'sp-wrap-square)
 (map! "M-{" #'sp-wrap-curly)
