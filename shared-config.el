@@ -134,3 +134,18 @@
       :leader
       "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
+
+
+;;; Markdown
+;; Bring the source markup view closer in appearance to the end-result.
+;; Differentiate the headings, add a little bit of line spacing.
+(add-hook! markdown-mode
+  (let ((family (symbol-name (font-get doom-serif-font :family))))
+    (custom-set-faces!
+      `(markdown-header-face-1  :height 2.25 :family ,family :weight black :inherit markdown-header-face)
+      `(markdown-header-face-2  :height 1.50 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-3  :height 1.25 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-4  :height 1.125 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
+  (setq writeroom-extra-line-spacing 1))
