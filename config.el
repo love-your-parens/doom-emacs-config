@@ -1,4 +1,4 @@
-;;; shared-config.el -*- lexical-binding: t; -*-
+;;; config.el -*- lexical-binding: t; -*-
 
 ;;; Workstation-agnostic, version-controlled, universal settings.
 
