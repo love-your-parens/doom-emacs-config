@@ -30,6 +30,15 @@
 (setq lsp-headerline-breadcrumb-enable t
       lsp-file-watch-threshold nil)
 
+;; Dragging lines and regions with M-up/down.
+(drag-stuff-global-mode t)
+(drag-stuff-define-keys)
+
+;; Beacon-mode adjustments.
+(setq beacon-color 0.2)
+(setq beacon-blink-duration 0.5)
+(beacon-mode t)
+
 
 ;;; Editor functionality
 (defun center-frame (&optional frame)
@@ -90,7 +99,6 @@
 (map! "M-<backspace>" #'evil-delete-backward-word)
 (map! "C-\"" #'paredit-doublequote)
 
-
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
 (map! "S-<up>" #'sp-backward-down-sexp)
@@ -102,7 +110,6 @@
 (map! "M-[" #'sp-wrap-square)
 (map! "M-{" #'sp-wrap-curly)
 
-
 ;; DAP Debugging
 (map! :leader
       (:prefix ("d" . "debugging")
@@ -110,23 +117,19 @@
        :desc "Start debugging" "d" #'dap-debug
        :desc "Stop debugging" "c" #'dap-disconnect))
 
-
 ;; CIDER
 (map! :after cider
       :map clojure-mode-map
       "<backtab>" #'cider-format-defun
       "C-M-<return>" #'cider-eval-sexp-at-point)
-
 (map! :after cider
       :map clojure-mode-map
       :localleader
       "e s" #'cider-eval-sexp-at-point)
-
 (map! :map clojure-mode-map
       :leader
       "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
-
 
 ;; PHP
 (map! :after php-mode
