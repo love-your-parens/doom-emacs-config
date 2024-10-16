@@ -7,6 +7,10 @@
 ```elisp
 (load! "shared/config.el")
 ```
+- add the following line at the end of your `packages.el`:
+```elisp
+(load! "shared/packages.el")
+```
 - run `doom sync`
 
 > Note:
