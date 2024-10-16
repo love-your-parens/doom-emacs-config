@@ -23,7 +23,7 @@
 ;;; General settings
 (setq display-line-numbers-type 'relative)
 (after! treemacs (treemacs-follow-mode 1))
-(setq calendar-week-start-day 1)
+(setq calendar-week-start-day 1) ; weeks start on mondays
 
 ;; LSP
 (setenv "LSP_USE_PLISTS" "true") ; performance
