@@ -21,9 +21,13 @@
 
 
 ;;; General settings
-(setq display-line-numbers-type 'relative)
 (after! treemacs (treemacs-follow-mode 1))
 (setq calendar-week-start-day 1) ; weeks start on mondays
+
+;; absolute line numbers in insert mode, relative elsewhere
+(setq display-line-numbers 'relative)
+(add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
+(add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
 
 ;; LSP
 (setenv "LSP_USE_PLISTS" "true") ; performance
