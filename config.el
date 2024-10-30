@@ -25,7 +25,7 @@
 (setq calendar-week-start-day 1) ; weeks start on mondays
 
 ;; absolute line numbers in insert mode, relative elsewhere
-(setq display-line-numbers 'relative)
+(setq display-line-numbers-type 'relative)
 (add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
 (add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
 
