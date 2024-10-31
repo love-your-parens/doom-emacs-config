@@ -103,7 +103,6 @@
 (map! :nvi "M-<right>" #'forward-same-syntax)
 (map! :leader "w O" #'window-next-enlargen)
 (map! "M-<backspace>" #'evil-delete-backward-word)
-(map! "C-\"" #'paredit-doublequote)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
@@ -112,9 +111,11 @@
 (map! "C-M-." #'sp-forward-slurp-sexp)
 (map! "S-M-<up>" #'sp-raise-sexp)
 (map! "S-M-<down>" #'sp-splice-sexp)
-(map! "M-9" #'sp-wrap-round)
-(map! "M-[" #'sp-wrap-square)
-(map! "M-{" #'sp-wrap-curly)
+;; These *will* mess up terminal input. Only activate them in GUI mode.
+(when (display-graphic-p)
+  (map! "M-9" #'sp-wrap-round)
+  (map! "M-[" #'sp-wrap-square)
+  (map! "M-{" #'sp-wrap-curly))
 
 ;; DAP Debugging
 (map! :leader
