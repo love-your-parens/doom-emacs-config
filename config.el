@@ -98,11 +98,12 @@
 
 ;;; Keybindings
 ;; Editor
-(map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "M-<left>" #'backward-same-syntax)
 (map! :nvi "M-<right>" #'forward-same-syntax)
-(map! :leader "w O" #'window-next-enlargen)
 (map! "M-<backspace>" #'evil-delete-backward-word)
+(map! "M-W" (lambda () "Expands selected region once." (interactive) (er--expand-region-1)))
+(map! :leader "w O" #'window-next-enlargen)
+(map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
