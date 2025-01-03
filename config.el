@@ -146,6 +146,16 @@
       "c F" #'lsp-format-region)
 
 
+;;; Enable & prioritise CIDER completions even in LSP mode.
+;;; FIXME Good intentions, but doesn't seem to work.
+;; (defun add-cider-completions ()
+;;   (add-to-list 'completion-at-point-functions 'cider-complete-at-point))
+;; (add-hook! '(cider-file-loaded-hook
+;;              cider-connected-hook ; fails - doesn't launch in the correct buffer context maybe?
+;;              )
+;;            #'add-cider-completions)
+
+
 ;;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
 ;; Differentiate the headings, add a little bit of line spacing.
