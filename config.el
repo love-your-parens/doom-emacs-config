@@ -169,3 +169,11 @@
       `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
       `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
   (setq writeroom-extra-line-spacing 1))
+
+
+;;; Denote
+(map! :leader "n D" #'denote-open-or-create)
+(map! :leader
+      (:prefix ("n d" . "Denote")
+       :desc "New file" "n" #'denote
+       :after denote :desc "Browse" "o" (cmd! (dired denote-directory))))
