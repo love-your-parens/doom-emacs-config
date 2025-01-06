@@ -104,6 +104,7 @@
 (map! "M-W" (lambda () "Expands selected region once." (interactive) (er--expand-region-1)))
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
+(map! "C-<tab>" #'other-window)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp)
