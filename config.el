@@ -23,6 +23,7 @@
 ;;; General settings
 (after! treemacs (treemacs-follow-mode 1))
 (setq calendar-week-start-day 1) ; weeks start on mondays
+(setq evil-move-beyond-eol t) ; not helpful, causes a ton of hiccups
 
 ;; absolute line numbers in insert mode, relative elsewhere
 (setq display-line-numbers-type 'relative)
