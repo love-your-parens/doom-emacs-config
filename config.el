@@ -148,6 +148,13 @@
       "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
 
+;; Denote
+(map! :when (require 'denote nil t)
+      :leader "n D" #'denote-open-or-create
+      :leader (:prefix ("n d" . "Denote")
+               :desc "New file" "n" #'denote
+               :desc "Browse" "o" (cmd! (dired denote-directory))))
+
 
 ;;; Enable & prioritise CIDER completions even in LSP mode.
 ;;; FIXME Good intentions, but doesn't seem to work.
@@ -172,11 +179,3 @@
       `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
       `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
   (setq writeroom-extra-line-spacing 1))
-
-
-;;; Denote
-(map! :leader "n D" #'denote-open-or-create)
-(map! :leader
-      (:prefix ("n d" . "Denote")
-       :desc "New file" "n" #'denote
-       :after denote :desc "Browse" "o" (cmd! (dired denote-directory))))
