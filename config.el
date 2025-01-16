@@ -108,17 +108,18 @@
 (map! :nvi "C-<tab>" #'other-window)
 
 ;; Structural editing
-(map! "S-<down>" #'sp-up-sexp)
-(map! "S-<up>" #'sp-backward-down-sexp)
-(map! "C-M-," #'sp-forward-barf-sexp)
-(map! "C-M-." #'sp-forward-slurp-sexp)
-(map! "S-M-<up>" #'sp-raise-sexp)
-(map! "S-M-<down>" #'sp-splice-sexp)
-;; These *will* mess up terminal input. Only activate them in GUI mode.
-(when (display-graphic-p)
-  (map! "M-9" #'sp-wrap-round)
-  (map! "M-[" #'sp-wrap-square)
-  (map! "M-{" #'sp-wrap-curly))
+(map! "S-<down>" #'sp-up-sexp
+      "S-<up>" #'sp-backward-down-sexp
+      "C-M-," #'sp-forward-barf-sexp
+      "C-M-." #'sp-forward-slurp-sexp
+      "S-M-<up>" #'sp-raise-sexp
+      "S-M-<down>" #'sp-splice-sexp
+      ;; These *will* mess up terminal input.
+      ;; Only activate them in GUI mode.
+      (:when (display-graphic-p)
+        "M-9" #'sp-wrap-round
+        "M-[" #'sp-wrap-square
+        "M-{" #'sp-wrap-curly))
 
 ;; DAP Debugging
 (map! :when (require 'dap-mode nil t)
