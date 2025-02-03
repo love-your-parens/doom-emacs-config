@@ -160,14 +160,9 @@
                :desc "Browse" "o" (cmd! (dired denote-directory))))
 
 
-;;; Enable & prioritise CIDER completions even in LSP mode.
-;;; FIXME Good intentions, but doesn't seem to work.
-;; (defun add-cider-completions ()
-;;   (add-to-list 'completion-at-point-functions 'cider-complete-at-point))
-;; (add-hook! '(cider-file-loaded-hook
-;;              cider-connected-hook ; fails - doesn't launch in the correct buffer context maybe?
-;;              )
-;;            #'add-cider-completions)
+;;; Enable CIDER completions even if LSP is active.
+(add-hook 'cider-mode-hook
+          (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
 
 
 ;;; Markdown
