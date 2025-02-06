@@ -27,6 +27,11 @@
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath=/tmp/tramp.%%C -o ControlPersist=yes") ; use persistent SSH connections
 
+;; File-mode associations
+(setq auto-mode-alist
+      (append auto-mode-alist
+              '(("\\.bb\\'" . clojure-mode))))
+
 ;; absolute line numbers in insert mode, relative elsewhere
 (setq display-line-numbers-type 'relative)
 (add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
@@ -134,7 +139,6 @@
 ;; CIDER
 (map! :after cider
       :map clojure-mode-map
-      "<backtab>" #'cider-format-defun
       "C-M-<return>" #'cider-eval-sexp-at-point)
 (map! :after cider
       :map clojure-mode-map
