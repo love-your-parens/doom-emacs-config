@@ -3,6 +3,10 @@
 - back up your `~/.config/doom/config.el` just in case
 - clone the repo to a subdirectory in `~/.config/doom`
     - subsequent steps assume `~/.config/doom/shared`
+- add the following line to your `init.el` **before** the `doom!` block:
+```elisp
+(load! "shared/early-init.el")
+```
 - add the following line at the end of your `config.el`:
 ```elisp
 (load! "shared/config.el")
