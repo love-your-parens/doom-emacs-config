@@ -38,11 +38,7 @@
 (add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
 
 ;; LSP
-(setenv "LSP_USE_PLISTS" "true") ; performance
-(setq lsp-headerline-breadcrumb-enable nil
-      lsp-file-watch-threshold nil)
-(add-hook! php-mode
-  (setq lsp-headerline-breadcrumb-enable t))
+(setq lsp-file-watch-threshold nil)
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
