@@ -109,6 +109,7 @@
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "C-<tab>" #'other-window)
+(after! evil-escape (setq evil-escape-key-sequence "jk"))
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp
