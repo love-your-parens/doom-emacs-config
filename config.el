@@ -179,3 +179,10 @@
       `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
       `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
   (setq writeroom-extra-line-spacing 1))
+
+;;; Sublimity
+;; Add smooth scroll to some motions, such as page down/up.
+(require 'sublimity-scroll)
+(sublimity-mode t)
+(setq sublimity-scroll-weight 5
+      sublimity-scroll-drift-length 10)

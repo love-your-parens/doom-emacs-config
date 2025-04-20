@@ -6,3 +6,6 @@
 
 ;; https://github.com/protesilaos/denote
 (package! denote)
+
+;; https://github.com/zk-phi/sublimity
+(package! sublimity)
