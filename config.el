@@ -38,7 +38,7 @@
 (add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
 
 ;; LSP
-(setq lsp-file-watch-threshold nil)
+(setq lsp-file-watch-threshold 10000) ; finite resource, particularly in OSX
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
