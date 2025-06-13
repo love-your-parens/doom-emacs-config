@@ -54,9 +54,8 @@
   :after evil
   :hook ((clojure-mode emacs-lisp-mode lisp-interaction-mode) . evil-cleverparens-mode)
   :init (progn (setq evil-cleverparens-use-additional-movement-keys nil)
-               (map! :nv
-                     "L" #'evil-cp-forward-sexp
-                     "H" #'evil-cp-backward-sexp)))
+               (map! :nv "L" #'evil-cp-forward-sexp
+                     :nv "H" #'evil-cp-backward-sexp)))
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
