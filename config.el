@@ -57,6 +57,9 @@
                (map! :nv "L" #'evil-cp-forward-sexp
                      :nv "H" #'evil-cp-backward-sexp)))
 
+;; Use LSP in PHP tree-sitter mode.
+(add-hook 'php-ts-mode-hook 'lsp)
+
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
 ;; Differentiate the headings, add a little bit of line spacing.
@@ -76,7 +79,8 @@
 
 (setq auto-mode-alist
       (append auto-mode-alist
-              '(("\\.bb\\'" . clojure-mode))))
+              '(("\\.bb\\'" . clojure-mode)
+                ("\\.php\\'" . php-ts-mode))))
 
 
 ;;; Editor functionality
