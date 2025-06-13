@@ -21,24 +21,20 @@
 
 
 ;;; General settings
+
 (after! treemacs (treemacs-follow-mode 1))
 (setq calendar-week-start-day 1) ; weeks start on mondays
 (setq evil-move-beyond-eol t) ; not helpful, causes a ton of hiccups
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath=/tmp/tramp.%%C -o ControlPersist=yes") ; use persistent SSH connections
 
-;; File-mode associations
-(setq auto-mode-alist
-      (append auto-mode-alist
-              '(("\\.bb\\'" . clojure-mode))))
-
-;; absolute line numbers in insert mode, relative elsewhere
+;; Absolute line numbers in insert mode, relative elsewhere.
 (setq display-line-numbers-type 'relative)
 (add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
 (add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
 
-;; LSP
-(setq lsp-file-watch-threshold 10000) ; finite resource, particularly in OSX
+;; Guard against exhausting the open-file limit in OSX.
+(setq lsp-file-watch-threshold (when (featurep :system 'macos) 10000))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
@@ -49,8 +45,43 @@
 (setq beacon-blink-duration 0.5)
 (beacon-mode t)
 
+;;; Enable CIDER completions even if LSP is active.
+(add-hook 'cider-mode-hook
+          (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
+
+;; Use evil-cleverparens but shed some of the conflicting binds.
+(use-package evil-cleverparens
+  :after evil
+  :hook ((clojure-mode emacs-lisp-mode lisp-interaction-mode) . evil-cleverparens-mode)
+  :init (progn (setq evil-cleverparens-use-additional-movement-keys nil)
+               (map! :nv
+                     "L" #'evil-cp-forward-sexp
+                     "H" #'evil-cp-backward-sexp)))
+
+;; Markdown
+;; Bring the source markup view closer in appearance to the end-result.
+;; Differentiate the headings, add a little bit of line spacing.
+(add-hook! markdown-mode
+  (let ((family (symbol-name (font-get doom-serif-font :family))))
+    (custom-set-faces!
+      `(markdown-header-face-1  :height 2.25 :family ,family :weight black :inherit markdown-header-face)
+      `(markdown-header-face-2  :height 1.50 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-3  :height 1.25 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-4  :height 1.125 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
+      `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
+  (setq writeroom-extra-line-spacing 1))
+
+
+;;; File-mode associations
+
+(setq auto-mode-alist
+      (append auto-mode-alist
+              '(("\\.bb\\'" . clojure-mode))))
+
 
 ;;; Editor functionality
+
 (defun center-frame (&optional frame)
   "Puts the selected frame in the middle of the screen."
   (interactive)
@@ -101,7 +132,9 @@
 
 
 ;;; Keybindings
+
 ;; Editor
+(after! evil-escape (setq evil-escape-key-sequence "jk"))
 (map! :nvi "M-<left>" #'backward-same-syntax)
 (map! :nvi "M-<right>" #'forward-same-syntax)
 (map! "M-<backspace>" #'evil-delete-backward-word)
@@ -109,7 +142,6 @@
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "C-<tab>" #'other-window)
-(after! evil-escape (setq evil-escape-key-sequence "jk"))
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp
@@ -124,14 +156,6 @@
         "M-9" #'sp-wrap-round
         "M-[" #'sp-wrap-square
         "M-{" #'sp-wrap-curly))
-
-;; DAP Debugging
-(map! :when (require 'dap-mode nil t)
-      :leader
-      (:prefix ("d" . "debugging")
-       :desc "Toggle breakpoint" "t" #'dap-breakpoint-toggle
-       :desc "Start debugging" "d" #'dap-debug
-       :desc "Stop debugging" "c" #'dap-disconnect))
 
 ;; CIDER
 (map! :after cider
@@ -160,22 +184,3 @@
                :desc "New file" "n" #'denote
                :desc "Browse" "o" (cmd! (dired denote-directory))))
 
-
-;;; Enable CIDER completions even if LSP is active.
-(add-hook 'cider-mode-hook
-          (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
-
-
-;;; Markdown
-;; Bring the source markup view closer in appearance to the end-result.
-;; Differentiate the headings, add a little bit of line spacing.
-(add-hook! markdown-mode
-  (let ((family (symbol-name (font-get doom-serif-font :family))))
-    (custom-set-faces!
-      `(markdown-header-face-1  :height 2.25 :family ,family :weight black :inherit markdown-header-face)
-      `(markdown-header-face-2  :height 1.50 :family ,family :inherit markdown-header-face)
-      `(markdown-header-face-3  :height 1.25 :family ,family :inherit markdown-header-face)
-      `(markdown-header-face-4  :height 1.125 :family ,family :inherit markdown-header-face)
-      `(markdown-header-face-5  :height 1.0 :family ,family :inherit markdown-header-face)
-      `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
-  (setq writeroom-extra-line-spacing 1))
