@@ -170,7 +170,7 @@
       "e s" #'cider-eval-sexp-at-point)
 (map! :map clojure-mode-map
       :leader
-      "c f" #'lsp-format-buffer
+      "c f" #'apheleia-format-buffer
       "c F" #'lsp-format-region)
 
 ;; PHP
@@ -186,4 +186,3 @@
       :leader (:prefix ("n d" . "Denote")
                :desc "New file" "n" #'denote
                :desc "Browse" "o" (cmd! (dired denote-directory))))
-
