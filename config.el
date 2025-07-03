@@ -58,7 +58,7 @@
                      :nv "H" #'evil-cp-backward-sexp)))
 
 ;; Use LSP in PHP tree-sitter mode.
-(add-hook 'php-ts-mode-hook 'lsp)
+(add-hook 'php-ts-mode-hook #'lsp)
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
@@ -171,13 +171,6 @@
 (map! :map clojure-mode-map
       :leader
       "c f" #'apheleia-format-buffer
-      "c F" #'lsp-format-region)
-
-;; PHP
-(map! :after php-mode
-      :map php-mode-map
-      :leader
-      "c f" #'lsp-format-buffer
       "c F" #'lsp-format-region)
 
 ;; Denote
