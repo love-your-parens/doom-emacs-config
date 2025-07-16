@@ -40,11 +40,6 @@
 (drag-stuff-global-mode t)
 (drag-stuff-define-keys)
 
-;; Beacon-mode adjustments.
-(setq beacon-color 0.2)
-(setq beacon-blink-duration 0.5)
-(beacon-mode t)
-
 ;;; Enable CIDER completions even if LSP is active.
 (add-hook 'cider-mode-hook
           (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
