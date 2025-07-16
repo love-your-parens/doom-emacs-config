@@ -27,6 +27,7 @@
 (setq evil-move-beyond-eol t) ; not helpful, causes a ton of hiccups
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath=/tmp/tramp.%%C -o ControlPersist=yes") ; use persistent SSH connections
+(setq lsp-modeline-code-action-fallback-icon  "󱉖")
 
 ;; Absolute line numbers in insert mode, relative elsewhere.
 (setq display-line-numbers-type 'relative)
