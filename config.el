@@ -43,9 +43,12 @@
 (drag-stuff-global-mode t)
 (drag-stuff-define-keys)
 
-;;; Enable CIDER completions even if LSP is active.
+;; Enable CIDER completions even if LSP is active.
 (add-hook 'cider-mode-hook
           (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
+;; CIDER REPL-popup should have its own modeline. This is to display the progress indicator.
+(set-popup-rule! "^\\*cider-repl" :modeline t :size 0.5)
+(setq cider-eval-spinner-type 'half-circle)
 
 ;; Use evil-cleverparens but shed some of the conflicting binds.
 (use-package evil-cleverparens
