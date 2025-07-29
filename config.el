@@ -47,7 +47,14 @@
 (add-hook 'cider-mode-hook
           (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
 ;; CIDER REPL-popup should have its own modeline. This is to display the progress indicator.
-(set-popup-rule! "^\\*cider-repl" :modeline t :size 0.5)
+(set-popup-rule! "^\\*cider-repl"
+  :size 0.2
+  ;; Only the essentials.
+  :modeline '((:eval (doom-modeline-segment--bar))
+              (:eval (doom-modeline-segment--window-state))
+              (:eval (doom-modeline-segment--modals))
+              (:eval (doom-modeline-segment--major-mode))
+              (:eval (doom-modeline-segment--process))))
 (setq cider-eval-spinner-type 'half-circle)
 
 ;; Use evil-cleverparens but shed some of the conflicting binds.
