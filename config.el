@@ -22,14 +22,15 @@
 
 ;;; General settings
 
+(setq calendar-week-start-day 1 ; weeks start on mondays
+      evil-move-beyond-eol t ; vim-like behaviour not helpful, causes a ton of hiccups
+      tramp-ssh-controlmaster-options "-o ControlMaster=auto -o ControlPath=/tmp/tramp.%%C -o ControlPersist=yes" ; use persistent SSH connections
+      which-key-idle-delay 0.5
+      which-key-idle-secondary-delay 0.01
+      lsp-modeline-code-action-fallback-icon  "󱉖"
+      display-line-numbers-type 'relative
+      cider-enrich-classpath t)
 (after! treemacs (treemacs-follow-mode 1))
-(setq calendar-week-start-day 1) ; weeks start on mondays
-(setq evil-move-beyond-eol t) ; not helpful, causes a ton of hiccups
-(setq tramp-ssh-controlmaster-options
-      "-o ControlMaster=auto -o ControlPath=/tmp/tramp.%%C -o ControlPersist=yes") ; use persistent SSH connections
-(setq which-key-idle-delay 0.5
-      which-key-idle-secondary-delay 0.01)
-(setq lsp-modeline-code-action-fallback-icon  "󱉖")
 
 ;; Absolute line numbers in insert mode, relative elsewhere.
 (setq display-line-numbers-type 'relative)
