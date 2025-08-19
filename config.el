@@ -61,16 +61,12 @@
               (:eval (doom-modeline-segment--process))))
 (setq cider-eval-spinner-type 'half-circle)
 
-;; Use evil-cleverparens but shed some of the conflicting binds.
-(use-package evil-cleverparens
-  :after evil
-  :hook ((clojure-mode emacs-lisp-mode lisp-interaction-mode) . evil-cleverparens-mode)
-  :init (progn (setq evil-cleverparens-use-additional-movement-keys nil)
-               (map! :nv "L" #'evil-cp-forward-sexp
-                     :nv "H" #'evil-cp-backward-sexp)))
-
 ;; Use LSP in PHP tree-sitter mode.
 (add-hook 'php-ts-mode-hook #'lsp)
+;; Use evil-smartparens to make evil play nicer with lispy syntax.
+(use-package evil-smartparens
+  :hook ((clojure-mode emacs-lisp-mode lisp-interaction-mode) . evil-smartparens-mode))
+
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
