@@ -61,12 +61,17 @@
               (:eval (doom-modeline-segment--process))))
 (setq cider-eval-spinner-type 'half-circle)
 
-;; Use LSP in PHP tree-sitter mode.
-(add-hook 'php-ts-mode-hook #'lsp)
 ;; Use evil-smartparens to make evil play nicer with lispy syntax.
 (use-package evil-smartparens
   :hook ((clojure-mode emacs-lisp-mode lisp-interaction-mode) . evil-smartparens-mode))
 
+;; PHP + LSP + tree-sitter activation.
+(after! tree-sitter (add-to-list 'tree-sitter-major-mode-language-alist '(php-ts-mode . php)))
+(after! lsp (add-hook 'php-ts-mode-hook #'lsp))
+(after! eglot
+  (add-to-list 'eglot-server-programs
+               `(php-mode . ("intelephense" "--stdio"
+                             :initializationOptions (:licenceKey ,lsp-intelephense-licence-key)))))
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
