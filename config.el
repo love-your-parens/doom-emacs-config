@@ -32,13 +32,16 @@
       cider-enrich-classpath t)
 (after! treemacs (treemacs-follow-mode 1))
 
+;; MacOS-specific settings.
+(when (featurep :system 'macos)
+  (setq consult-locate-args "mdfind" ; supplants /bin/locate - preferred in OSX
+        lsp-file-watch-threshold 10000 ; guards against exhausting the open-file limit in OSX
+        ))
+
 ;; Absolute line numbers in insert mode, relative elsewhere.
 (setq display-line-numbers-type 'relative)
 (add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
 (add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
-
-;; Guard against exhausting the open-file limit in OSX.
-(setq lsp-file-watch-threshold (when (featurep :system 'macos) 10000))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
