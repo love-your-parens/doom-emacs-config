@@ -73,8 +73,9 @@
 (after! lsp (add-hook 'php-ts-mode-hook #'lsp))
 (after! eglot
   (add-to-list 'eglot-server-programs
+               ;; NOTE License key must be defined before this hook is loaded!
                `(php-mode . ("intelephense" "--stdio"
-                             :initializationOptions (:licenceKey ,lsp-intelephense-licence-key)))))
+                             :initializationOptions (:licenceKey ,(bound-and-true-p lsp-intelephense-licence-key))))))
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
