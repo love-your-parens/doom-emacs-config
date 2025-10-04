@@ -70,7 +70,6 @@
 
 ;; PHP + LSP + tree-sitter activation.
 (after! tree-sitter (add-to-list 'tree-sitter-major-mode-language-alist '(php-ts-mode . php)))
-(after! lsp (add-hook 'php-ts-mode-hook #'lsp))
 (after! eglot
   (add-to-list 'eglot-server-programs
                ;; NOTE License key must be defined before this hook is loaded!
