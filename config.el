@@ -192,10 +192,6 @@
       :map clojure-mode-map
       :localleader
       "e s" #'cider-eval-sexp-at-point)
-(map! :map clojure-mode-map
-      :leader
-      "c f" #'apheleia-format-buffer
-      "c F" #'lsp-format-region)
 
 ;; Denote
 (map! :when (require 'denote nil t)
