@@ -67,6 +67,8 @@
 ;; Use evil-smartparens to make evil play nicer with lispy syntax.
 (use-package evil-smartparens
   :hook ((clojure-mode emacs-lisp-mode lisp-mode lisp-interaction-mode lisp-data-mode common-lisp-mode) . evil-smartparens-mode))
+;; Recognise lines as text-objects. Enables `vil', `val' etc.
+(use-package evil-textobj-line :after evil)
 
 ;; PHP + LSP + tree-sitter activation.
 (after! tree-sitter (add-to-list 'tree-sitter-major-mode-language-alist '(php-ts-mode . php)))

@@ -6,3 +6,6 @@
 
 ;; https://github.com/expez/evil-smartparens
 (package! evil-smartparens)
+
+;; https://github.com/emacsorphanage/evil-textobj-line?tab=readme-ov-file
+(package! evil-textobj-line)
