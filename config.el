@@ -66,7 +66,7 @@
 
 ;; Use evil-smartparens to make evil play nicer with lispy syntax.
 (use-package evil-smartparens
-  :hook ((clojure-mode emacs-lisp-mode lisp-mode lisp-interaction-mode lisp-data-mode common-lisp-mode) . evil-smartparens-mode))
+  :hook ((clojure-mode clojure-ts-mode emacs-lisp-mode lisp-mode lisp-interaction-mode lisp-data-mode common-lisp-mode) . evil-smartparens-mode))
 ;; Recognise lines as text-objects. Enables `vil', `val' etc.
 (use-package evil-textobj-line :after evil)
 
