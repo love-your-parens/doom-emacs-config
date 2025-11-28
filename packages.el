@@ -9,3 +9,5 @@
 
 ;; https://github.com/emacsorphanage/evil-textobj-line?tab=readme-ov-file
 (package! evil-textobj-line)
+
+(package! rainbow-mode)
