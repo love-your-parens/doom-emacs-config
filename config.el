@@ -71,7 +71,6 @@
 (use-package evil-textobj-line :after evil)
 
 ;; PHP + LSP + tree-sitter activation.
-(after! tree-sitter (add-to-list 'tree-sitter-major-mode-language-alist '(php-ts-mode . php)))
 (after! eglot
   (add-to-list 'eglot-server-programs
                ;; NOTE License key must be defined before this hook is loaded!
@@ -104,8 +103,7 @@
 
 (setq auto-mode-alist
       (append auto-mode-alist
-              '(("\\.bb\\'" . clojure-mode)
-                ("\\.php\\'" . php-ts-mode))))
+              '(("\\.bb\\'" . clojure-mode))))
 
 
 ;;; Editor functionality
