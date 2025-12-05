@@ -198,3 +198,9 @@
       :leader (:prefix ("n d" . "Denote")
                :desc "New file" "n" #'denote
                :desc "Browse" "o" (cmd! (dired denote-directory))))
+
+;; Writeroom mode
+(map! :after writeroom-mode
+      :map writeroom-mode-map
+      "C->" #'writeroom-increase-width
+      "C-<" #'writeroom-decrease-width)
