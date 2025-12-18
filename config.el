@@ -39,10 +39,13 @@
         lsp-file-watch-threshold 10000 ; guards against exhausting the open-file limit in OSX
         ))
 
-;; Absolute line numbers in insert mode, relative elsewhere.
-(setq display-line-numbers-type 'relative)
-(add-hook! 'evil-insert-state-entry-hook (setq display-line-numbers t))
-(add-hook! 'evil-insert-state-exit-hook (setq display-line-numbers 'relative))
+;; Use absolute line numbers in insert mode, relative elsewhere.
+(add-hook! 'evil-insert-state-entry-hook
+  (when display-line-numbers (setq display-line-numbers t)))
+(add-hook! 'evil-insert-state-exit-hook
+  (when display-line-numbers (setq display-line-numbers 'relative)))
+;; Disable line numbers in certain modes.
+(add-hook! 'vterm-mode-hook (setq display-line-numbers nil))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
