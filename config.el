@@ -30,7 +30,7 @@
       lsp-modeline-code-action-fallback-icon  "󱉖"
       display-line-numbers-type 'relative
       cider-enrich-classpath t
-      +zen-text-scale 1.1)
+      +zen-text-scale 1)
 (after! treemacs (treemacs-follow-mode 1))
 
 ;; MacOS-specific settings.
