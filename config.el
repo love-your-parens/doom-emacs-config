@@ -104,11 +104,14 @@
 
 
 ;;; File-mode associations
-
-(setq auto-mode-alist
-      (append auto-mode-alist
-              '(("\\.bb\\'" . clojure-mode))))
-
+;; NOTE Some resolved conditionally based on available features.
+(let* ((docker-mode (or (when (modulep! :tools docker +tree-sitter) 'dockerfile-ts-mode)
+                        (when (modulep! :tools docker) 'dockerfile-mode)
+                        'fundamental-mode)))
+  (setq auto-mode-alist
+        (append auto-mode-alist
+                `(("\\.bb\\'" . clojure-mode)
+                  ("Dockerfile\\(-\\w+\\)*\\'" . ,docker-mode)))))
 
 ;;; Editor functionality
 
