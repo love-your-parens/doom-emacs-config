@@ -110,8 +110,8 @@
                         'fundamental-mode)))
   (setq auto-mode-alist
         (append auto-mode-alist
-                `(("\\.bb\\'" . clojure-mode)
-                  ("Dockerfile\\(-\\w+\\)*\\'" . ,docker-mode)))))
+                `((,(rx ".bb" string-end) . clojure-mode)
+                  (,(rx "Dockerfile" (* "-" (+ alphanumeric)) string-end) . ,docker-mode)))))
 
 ;;; Editor functionality
 
