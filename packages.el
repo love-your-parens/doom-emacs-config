@@ -11,3 +11,6 @@
 (package! evil-textobj-line)
 
 (package! rainbow-mode)
+
+;; https://github.com/tarsius/paren-face
+(package! paren-face)

@@ -33,6 +33,9 @@
       +zen-text-scale 1)
 (after! treemacs (treemacs-follow-mode 1))
 
+;; Enable if you get tired of seeing your parens.
+;; (use-package paren-face :config (global-paren-face-mode t))
+
 ;; MacOS-specific settings.
 (when (featurep :system 'macos)
   (setq consult-locate-args "mdfind" ; supplants /bin/locate - preferred in OSX
