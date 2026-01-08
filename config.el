@@ -98,12 +98,15 @@
       `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
   (setq writeroom-extra-line-spacing 1))
 
+
 ;; Nest Denote notes within the main org directory and include them in agenda.
 ;; NOTE Make sure org-directory is initialised beforehand!
+;; NOTE To include directories recursively, the following formula can be repurposed:
+;; (let ((root-dir (concat org-directory "")))
+;;   (cons root-dir (prune-directory-list (directory-files-recursively root-dir (rx string-start (not ".")) t))))
 (when org-directory
   (setq denote-directory (concat org-directory "/notes")
-        org-agenda-files (mapcar (lambda (subdir) (concat org-directory subdir))
-                                 '("" "notes"))))
+        org-agenda-files (list org-directory denote-directory)))
 
 
 ;;; File-mode associations
