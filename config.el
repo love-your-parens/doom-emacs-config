@@ -104,9 +104,10 @@
 ;; NOTE To include directories recursively, the following formula can be repurposed:
 ;; (let ((root-dir (concat org-directory "")))
 ;;   (cons root-dir (prune-directory-list (directory-files-recursively root-dir (rx string-start (not ".")) t))))
-(when org-directory
-  (setq denote-directory (concat org-directory "/notes")
-        org-agenda-files (list org-directory denote-directory)))
+(after! org
+  (when org-directory
+    (setq denote-directory (concat org-directory "/notes")
+          org-agenda-files (list org-directory denote-directory))))
 
 
 ;;; File-mode associations
