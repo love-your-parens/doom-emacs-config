@@ -33,6 +33,15 @@
       +zen-text-scale 1)
 (after! treemacs (treemacs-follow-mode 1))
 
+(defun resolve-terminal-emulator ()
+  "Resolves the designated terminal emulator, unless already set."
+  (if (boundp 'user-terminal-emulator) user-terminal-emulator
+    (setq user-terminal-emulator
+          (or (executable-find "kitty")
+              (executable-find "konsole")
+              (executable-find "alacritty")
+              (executable-find "ghostty")))))
+
 ;; Enable if you get tired of seeing your parens.
 ;; (use-package paren-face :config (global-paren-face-mode t))
 
@@ -182,6 +191,15 @@
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "C-<tab>" #'other-window)
+(unless (featurep :system 'macos)
+  (map! :leader :desc "Open terminal here" "o K"
+        (lambda ()
+          (interactive)
+          (if-let ((exe (resolve-terminal-emulator)))
+              (shell-command exe (doom-project-root))
+            (message (concat "No suitable terminal emulator found!"
+                             "You can override this by setting 'user-terminal-emulator manually."))))))
+
 ;; Elisp
 (map! :nvi "C-M-<return>" #'eros-eval-last-sexp)
 (map! :nvi "S-C-M-<return>" #'eros-eval-defun)
