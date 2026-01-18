@@ -182,6 +182,9 @@
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "C-<tab>" #'other-window)
+;; Elisp
+(map! :nvi "C-M-<return>" #'eros-eval-last-sexp)
+(map! :nvi "S-C-M-<return>" #'eros-eval-defun)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp
@@ -200,11 +203,9 @@
 ;; CIDER
 (map! :after cider
       :map clojure-mode-map
-      "C-M-<return>" #'cider-eval-sexp-at-point)
-(map! :after cider
-      :map clojure-mode-map
-      :localleader
-      "e s" #'cider-eval-sexp-at-point)
+      "C-M-<return>" #'cider-eval-sexp-at-point
+      "S-C-M-<return>" #'cider-eval-defun-at-point
+      :localleader "e s" #'cider-eval-sexp-at-point)
 
 ;; Denote
 (map! :when (require 'denote nil t)
