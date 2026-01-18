@@ -195,7 +195,7 @@
         (lambda ()
           (interactive)
           (if-let ((exe (resolve-terminal-emulator)))
-              (shell-command exe (doom-project-root))
+              (start-process "terminal" nil exe (doom-project-root))
             (message (concat "No suitable terminal emulator found! "
                              "You can override this by setting 'user-terminal-emulator' manually."))))))
 
