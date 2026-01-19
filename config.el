@@ -200,8 +200,8 @@
                              "You can override this by setting 'user-terminal-emulator' manually."))))))
 
 ;; Elisp
-(map! :nvi "C-M-<return>" #'eros-eval-last-sexp)
-(map! :nvi "S-C-M-<return>" #'eros-eval-defun)
+(map! "C-M-<return>" #'eros-eval-last-sexp)
+(map! "S-C-M-<return>" #'eros-eval-defun)
 
 ;; Structural editing
 (map! "S-<down>" #'sp-up-sexp
