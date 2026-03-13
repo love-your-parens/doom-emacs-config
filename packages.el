@@ -14,3 +14,6 @@
 
 ;; https://github.com/tarsius/paren-face
 (package! paren-face)
+
+;; https://github.com/alphapapa/topsy.el
+(package! topsy)

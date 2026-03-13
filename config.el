@@ -69,6 +69,9 @@
                                              :definition #'+clojure-cider-lookup-definition
                                              :documentation #'cider-doc)))
 
+;; Enable topsy.el to get nice, VSC-like sticky headers.
+(use-package topsy :hook ((magit-section-mode prog-mode) . topsy-mode))
+
 ;; CIDER REPL-popup should have its own modeline. This is to display the progress indicator.
 (set-popup-rule! "^\\*cider-repl"
   :size 0.2
