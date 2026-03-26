@@ -30,6 +30,7 @@
       lsp-modeline-code-action-fallback-icon  "󱉖"
       display-line-numbers-type 'relative
       cider-enrich-classpath t
+      save-interprogram-paste-before-kill t ; stop losing things you wanted to paste from the outside
       +zen-text-scale 1)
 (after! treemacs (treemacs-follow-mode 1))
 
