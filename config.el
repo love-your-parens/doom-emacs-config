@@ -186,7 +186,7 @@
 ;;; Keybindings
 
 ;; Editor
-(after! evil-escape (setq evil-escape-key-sequence "jj"))
+(after! evil-escape (setq evil-escape-key-sequence "hj"))
 (map! :nvi "M-<left>" #'backward-same-syntax)
 (map! :nvi "M-<right>" #'forward-same-syntax)
 (map! "M-<backspace>" #'evil-delete-backward-word)
