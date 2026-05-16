@@ -59,7 +59,7 @@
 (add-hook! 'evil-insert-state-exit-hook
   (when display-line-numbers (setq display-line-numbers 'relative)))
 ;; Disable line numbers in certain modes.
-(add-hook! 'vterm-mode-hook (setq display-line-numbers nil))
+(add-hook! '(vterm-mode-hook org-tree-slide-mode-hook) (setq display-line-numbers nil))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
