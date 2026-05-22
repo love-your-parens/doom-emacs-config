@@ -2,23 +2,7 @@
 
 ;;; Workstation-agnostic, version-controlled, universal settings.
 
-
-;; Here are some settings specific to workstation and environment,
-;; which you'll want to put in the main configuration file instead.
-;;
-;; Initial frame size & position:
-;; (add-to-list 'initial-frame-alist '(width . 120))
-;; (add-to-list 'initial-frame-alist '(height . 40))
-;; (add-to-list 'initial-frame-alist '(left . 0.5))
-;; (add-to-list 'initial-frame-alist '(top . 0.5))
-;;
-;; Subsequent frames:
-;; (add-to-list 'default-frame-alist '(width . 120))
-;; (add-to-list 'default-frame-alist '(height . 40))
-;;
-;; Splash ASCII-art replacement:
-;; (setq fancy-splash-image (concat doom-user-dir "splash/emacs.svg"))
-
+(defmacro comment (&rest _)) ; Quick copy of Clojure's rich comment blocks.
 
 ;;; General settings
 
@@ -44,9 +28,6 @@
               (executable-find "alacritty")
               (executable-find "ghostty")))))
 
-;; Enable if you get tired of seeing your parens.
-;; (use-package paren-face :config (global-paren-face-mode t))
-
 ;; MacOS-specific settings.
 (when (featurep :system 'macos)
   (setq consult-locate-args "mdfind" ; supplants /bin/locate - preferred in OSX
@@ -65,25 +46,17 @@
 (drag-stuff-global-mode t)
 (drag-stuff-define-keys)
 
+;; Enable topsy.el to get nice, VSC-like sticky headers.
+(use-package topsy :hook ((magit-section-mode prog-mode) . topsy-mode))
+
+;; Enable if you get tired of seeing your parens.
+;; (use-package paren-face :config (global-paren-face-mode t))
+
 ;; Enable CIDER completions and definitions even when LSP is active.
 (add-hook 'cider-mode-hook (lambda () (add-to-list 'completion-at-point-functions 'cider-complete-at-point)))
 (add-hook 'cider-connected-hook (lambda () (set-lookup-handlers! '(cider-mode cider-repl-mode)
                                              :definition #'+clojure-cider-lookup-definition
                                              :documentation #'cider-doc)))
-
-;; Enable topsy.el to get nice, VSC-like sticky headers.
-(use-package topsy :hook ((magit-section-mode prog-mode) . topsy-mode))
-
-;; CIDER REPL-popup should have its own modeline. This is to display the progress indicator.
-(set-popup-rule! "^\\*cider-repl"
-  :size 0.2
-  ;; Only the essentials.
-  :modeline '((:eval (doom-modeline-segment--bar))
-              (:eval (doom-modeline-segment--window-state))
-              (:eval (doom-modeline-segment--modals))
-              (:eval (doom-modeline-segment--major-mode))
-              (:eval (doom-modeline-segment--process))))
-(setq cider-eval-spinner-type 'half-circle)
 
 ;; Use evil-smartparens to make evil play nicer with lispy syntax.
 (use-package evil-smartparens
@@ -112,7 +85,6 @@
       `(markdown-header-face-6  :height 1.0 :family ,family :weight semibold :inherit markdown-header-face)))
   (setq writeroom-extra-line-spacing 1))
 
-
 ;; Nest Denote notes within the main org directory and include them in agenda.
 ;; NOTE Make sure org-directory is initialised beforehand!
 ;; NOTE To include directories recursively, the following formula can be repurposed:
@@ -125,6 +97,7 @@
 
 
 ;;; File-mode associations
+
 ;; NOTE Some resolved conditionally based on available features.
 (let* ((docker-mode (or (when (modulep! :tools docker +tree-sitter) 'dockerfile-ts-mode)
                         (when (modulep! :tools docker) 'dockerfile-mode)
@@ -133,6 +106,7 @@
         (append auto-mode-alist
                 `((,(rx ".bb" string-end) . clojure-mode)
                   (,(rx "Dockerfile" (* "-" (+ alphanumeric)) string-end) . ,docker-mode)))))
+
 
 ;;; Editor functionality
 
@@ -183,6 +157,7 @@
 (defun backward-same-syntax (arg)
   (interactive "^p")
   (forward-same-syntax (- (or arg 1))))
+
 
 ;;; Keybindings
 
@@ -241,3 +216,42 @@
       :map writeroom-mode-map
       "C->" #'writeroom-increase-width
       "C-<" #'writeroom-decrease-width)
+
+
+;;; Useful snippets
+(comment
+ ;; Here are some settings specific to workstation and environment,
+ ;; which you'll want to put in the main configuration file instead.
+
+ ;; Initial frame size & position:
+ (add-to-list 'initial-frame-alist '(width . 120))
+ (add-to-list 'initial-frame-alist '(height . 40))
+ (add-to-list 'initial-frame-alist '(left . 0.5))
+ (add-to-list 'initial-frame-alist '(top . 0.5))
+
+ ;; Subsequent frames:
+ (add-to-list 'default-frame-alist '(width . 120))
+ (add-to-list 'default-frame-alist '(height . 40))
+
+ ;; Splash ASCII-art replacement:
+ (setq fancy-splash-image (concat doom-user-dir "splash/emacs.svg"))
+
+ ;; Handle non-POSIX shells cleanly:
+ (setq shell-file-name (executable-find "zsh"))
+ (setq-default vterm-shell "/opt/homebrew/bin/fish")
+ (setq-default explicit-shell-file-name "/opt/homebrew/bin/fish")
+
+ ;; Intelephense:
+ (setq lsp-intelephense-licence-key "")
+
+ ;; Add spice to top level org-mode headings
+ (after! org
+   (custom-set-faces `(org-level-1 ((t . (:family "DM Serif Display"
+                                          :slant normal
+                                          :width normal
+                                          :weight normal
+                                          :height 1.75
+                                          :box (:line-width (1 . 6)
+                                                :color ,(face-background 'org-level-1 nil 'default)
+                                                :style nil)))))))
+ )
