@@ -263,20 +263,20 @@
  ;; Intelephense:
  (setq lsp-intelephense-licence-key "")
 
-;; Add spice to top level org-mode headings.
-;; NOTE Projected dynamically relative to the theme.
-(let* ((make-faces
-        (lambda ()
-          `(org-level-1 ((t . (:family "DM Serif Display"
-                               :slant normal
-                               :width normal
-                               :weight bold
-                               :height 1.75
-                               :box (:line-width (1 . 6)
-                                     :color ,(face-background 'org-level-1 nil 'default)
-                                     :style nil)))))))
-       (set-faces (lambda () (custom-set-faces (funcall make-faces)))))
-  (after! org
-    (add-hook 'doom-load-theme-hook set-faces)
-    (funcall set-faces)))
+ ;; Add spice to top level org-mode headings.
+ ;; NOTE Projected dynamically relative to the theme.
+ (let* ((make-faces
+         (lambda ()
+           `(org-level-1 ((t . (:family "DM Serif Display"
+                                :slant normal
+                                :width normal
+                                :weight bold
+                                :height 1.75
+                                :box (:line-width (1 . 6)
+                                      :color ,(face-background 'org-level-1 nil 'default)
+                                      :style nil)))))))
+        (set-faces (lambda () (custom-set-faces (funcall make-faces)))))
+   (after! org
+     (add-hook 'doom-load-theme-hook set-faces)
+     (funcall set-faces)))
  )
