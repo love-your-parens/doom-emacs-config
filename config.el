@@ -96,6 +96,25 @@
           org-agenda-files (list org-directory denote-directory))))
 
 
+;;; Spellchecking
+;; NOTE Assumes the dictionaries have been installed for aspell+hunspell.
+
+;; Use the correct dictionaries with spell-fu + aspell.
+(when (modulep! :checkers spell -flyspell)
+  (add-hook 'spell-fu-mode-hook
+            (lambda () (dolist (lang '("pl" "en"))
+                         (spell-fu-dictionary-add
+                          (spell-fu-get-ispell-dictionary lang))))))
+
+;; If using hunspell, enable multi-language.
+(when (modulep! :checkers spell +hunspell)
+  (after! ispell
+    (ispell-set-spellchecker-params)
+    (let ((dic "english,polish"))
+      (ispell-hunspell-add-multi-dic dic)
+      (setq ispell-dictionary dic))))
+
+
 ;;; File-mode associations
 
 ;; NOTE Some resolved conditionally based on available features.
