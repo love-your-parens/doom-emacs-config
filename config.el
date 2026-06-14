@@ -41,6 +41,10 @@
   (when display-line-numbers (setq display-line-numbers 'relative)))
 ;; Disable line numbers in certain modes.
 (add-hook! '(vterm-mode-hook org-tree-slide-mode-hook) (setq display-line-numbers nil))
+;; Disable line numbers in writeroom mode, but reactivate them on exit.
+(add-hook! 'writeroom-mode-enable-hook (display-line-numbers-mode -1))
+(add-hook! 'writeroom-mode-disable-hook (when display-line-numbers-type
+                                          (display-line-numbers-mode +1)))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
