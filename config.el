@@ -1,6 +1,10 @@
 ;;; config.el -*- lexical-binding: t; -*-
 
-;;; Workstation-agnostic, version-controlled, universal settings.
+;;;; Platform-specific settings.
+
+(when (featurep :system 'macos) (load! "config.macos.el"))
+
+;;;; Workstation-agnostic, universal settings.
 
 (defmacro comment (&rest _)) ; Quick copy of Clojure's rich comment blocks.
 
@@ -27,12 +31,6 @@
               (executable-find "konsole")
               (executable-find "alacritty")
               (executable-find "ghostty")))))
-
-;; MacOS-specific settings.
-(when (featurep :system 'macos)
-  (setq consult-locate-args "mdfind" ; supplants /bin/locate - preferred in OSX
-        lsp-file-watch-threshold 10000 ; guards against exhausting the open-file limit in OSX
-        ))
 
 ;; Use absolute line numbers in insert mode, relative elsewhere.
 (add-hook! 'evil-insert-state-entry-hook
@@ -193,14 +191,13 @@
 (map! :leader "w O" #'window-next-enlargen)
 (map! :leader :desc "Toggle frame decoration" "t d" #'toggle-frame-decoration)
 (map! :nvi "C-<tab>" #'other-window)
-(unless (featurep :system 'macos)
-  (map! :leader :desc "Open terminal here" "o K"
-        (lambda ()
-          (interactive)
-          (if-let ((exe (resolve-terminal-emulator)))
-              (start-process "terminal" nil exe (doom-project-root))
-            (message (concat "No suitable terminal emulator found! "
-                             "You can override this by setting 'user-terminal-emulator' manually."))))))
+(map! :leader :desc "Open terminal here" "o K"
+      (lambda ()
+        (interactive)
+        (if-let ((exe (resolve-terminal-emulator)))
+            (start-process "terminal" nil exe (doom-project-root))
+          (message (concat "No suitable terminal emulator found! "
+                           "You can override this by setting 'user-terminal-emulator' manually.")))))
 
 ;; Elisp
 (map! "C-M-<return>" #'eros-eval-last-sexp)

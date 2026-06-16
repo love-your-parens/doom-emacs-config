@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; https://github.com/rejeep/drag-stuff.el
 (package! drag-stuff)
 
@@ -17,3 +19,6 @@
 
 ;; https://github.com/alphapapa/topsy.el
 (package! topsy)
+
+;; MacOS-specific packages.
+(when (featurep :system 'macos) (load! "packages.macos.el"))
