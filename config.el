@@ -49,7 +49,9 @@
 (drag-stuff-define-keys)
 
 ;; Enable topsy.el to get nice, VSC-like sticky headers.
-(use-package topsy :hook ((magit-section-mode prog-mode) . topsy-mode))
+(use-package topsy :hook ((magit-section-mode prog-mode) . (lambda ()
+                                                             (unless (string-equal (buffer-name) "*doom:scratch*")
+                                                              (topsy-mode)))))
 
 ;; Enable if you get tired of seeing your parens.
 ;; (use-package paren-face :config (global-paren-face-mode t))
