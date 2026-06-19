@@ -70,14 +70,16 @@
 (after! eglot
   (add-to-list 'eglot-server-programs
                ;; NOTE License key must be defined before this hook is loaded!
-               `(php-mode . ("intelephense" "--stdio"
+               `((php-mode php-ts-mode) . ("intelephense" "--stdio"
                              :initializationOptions (:licenceKey ,(bound-and-true-p lsp-intelephense-licence-key))))))
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
 ;; Differentiate the headings, add a little bit of line spacing.
 (add-hook! markdown-mode
-  (let ((family (symbol-name (font-get doom-serif-font :family))))
+  (when-let ((font (or (and (bound-and-true-p display-font) (fontp display-font) display-font)
+                       (bound-and-true-p doom-serif-font)))
+             (family (symbol-name (font-get font :family))))
     (custom-set-faces!
       `(markdown-header-face-1  :height 2.25 :family ,family :weight black :inherit markdown-header-face)
       `(markdown-header-face-2  :height 1.50 :family ,family :inherit markdown-header-face)
