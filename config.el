@@ -49,9 +49,12 @@
 (drag-stuff-define-keys)
 
 ;; Enable topsy.el to get nice, VSC-like sticky headers.
-(use-package topsy :hook ((magit-section-mode prog-mode) . (lambda ()
-                                                             (unless (string-equal (buffer-name) "*doom:scratch*")
-                                                              (topsy-mode)))))
+(use-package topsy :hook ((magit-section-mode
+                           prog-mode
+                           conf-mode) .
+                           (lambda ()
+                             (unless (string-equal (buffer-name) "*doom:scratch*")
+                               (topsy-mode)))))
 
 ;; Enable if you get tired of seeing your parens.
 ;; (use-package paren-face :config (global-paren-face-mode t))
@@ -73,7 +76,7 @@
   (add-to-list 'eglot-server-programs
                ;; NOTE License key must be defined before this hook is loaded!
                `((php-mode php-ts-mode) . ("intelephense" "--stdio"
-                             :initializationOptions (:licenceKey ,(bound-and-true-p lsp-intelephense-licence-key))))))
+                                           :initializationOptions (:licenceKey ,(bound-and-true-p lsp-intelephense-licence-key))))))
 
 ;; Markdown
 ;; Bring the source markup view closer in appearance to the end-result.
