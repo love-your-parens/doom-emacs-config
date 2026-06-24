@@ -226,7 +226,7 @@
 
 ;; CIDER
 (map! :after cider
-      :map clojure-mode-map
+      :map (clojure-mode-map clojure-ts-mode-map)
       "C-M-<return>" #'cider-eval-sexp-at-point
       "S-C-M-<return>" #'cider-eval-defun-at-point
       :localleader "e s" #'cider-eval-sexp-at-point)
