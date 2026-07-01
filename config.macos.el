@@ -7,7 +7,9 @@
       )
 
 ;; Make sure PATH is correctly loaded in in GUI mode.
-(when (memq window-system '(ns mac))
+;; NOTE unnecessary if emacs-plus was built with inject_path
+(when (and (memq window-system '(ns mac))
+           (featurep 'exec-path-from-shell))
   (exec-path-from-shell-initialize))
 
 ;; Handle non-POSIX shells cleanly:
