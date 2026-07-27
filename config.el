@@ -231,6 +231,12 @@
       "S-C-M-<return>" #'cider-eval-defun-at-point
       :localleader "e s" #'cider-eval-sexp-at-point)
 
+;; Fennel
+(map! :after fennel-mode
+      :map (fennel-mode-map fennel-ts-mode-map)
+      "C-M-<return>" #'fennel-eval-last-sexp
+      "S-C-M-<return>" #'fennel-eval-toplevel-form)
+
 ;; Denote
 (map! :when (require 'denote nil t)
       :leader "n D" #'denote-open-or-create
