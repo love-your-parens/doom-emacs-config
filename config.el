@@ -71,6 +71,10 @@
 ;; Recognise lines as text-objects. Enables `vil', `val' etc.
 (use-package evil-textobj-line :after evil)
 
+;; Use Delta when available.
+(when (executable-find "delta")
+  (use-package! magit-delta :hook (magit-mode . magit-delta-mode)))
+
 ;; PHP + LSP + tree-sitter activation.
 (after! eglot
   (add-to-list 'eglot-server-programs
