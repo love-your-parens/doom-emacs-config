@@ -104,6 +104,37 @@
     (setq denote-directory (concat org-directory "/notes")
           org-agenda-files (list org-directory denote-directory))))
 
+;; Add some (all?) of the evil-easymotions to the jumplist.
+(after! evil-easymotion
+  (dolist (f (list #'evilem-motion-find-char
+                   #'evilem-motion-next-line
+                   #'evilem-motion-search-next
+                   #'evilem-motion-find-char-to
+                   #'evilem-motion-previous-line
+                   #'evilem-motion-search-previous
+                   #'evilem-motion-forward-WORD-end
+                   #'evilem-motion-forward-word-end
+                   #'evilem-motion-next-visual-line
+                   #'evilem-motion-backward-WORD-end
+                   #'evilem-motion-backward-word-end
+                   #'evilem-motion-find-char-backward
+                   #'evilem-motion-forward-WORD-begin
+                   #'evilem-motion-forward-word-begin
+                   #'evilem-motion-backward-WORD-begin
+                   #'evilem-motion-backward-word-begin
+                   #'evilem-motion-forward-section-end
+                   #'evilem-motion-search-word-forward
+                   #'evilem-motion-backward-section-end
+                   #'evilem-motion-previous-visual-line
+                   #'evilem-motion-search-word-backward
+                   #'evilem-motion-find-char-to-backward
+                   #'evilem-motion-forward-section-begin
+                   #'evilem-motion-backward-section-begin
+                   #'evilem-motion-forward-sentence-begin
+                   #'evilem-motion-backward-sentence-begin
+                   #'evilem-motion-next-line-first-non-blank
+                   #'evilem-motion-previous-line-first-non-blank))
+    (when (functionp f) (evil-add-command-properties f :jump t))))
 
 ;;; Spellchecking
 ;; NOTE Assumes the dictionaries have been installed for aspell+hunspell.
