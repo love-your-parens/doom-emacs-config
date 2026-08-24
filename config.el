@@ -3,6 +3,7 @@
 ;;;; Platform-specific settings.
 
 (when (featurep :system 'macos) (load! "config.macos.el"))
+(when (string-equal system-type "gnu/linux") (load! "config.linux.el"))
 
 ;;;; Workstation-agnostic, universal settings.
 
