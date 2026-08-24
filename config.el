@@ -246,7 +246,7 @@
       "S-<up>" #'sp-backward-down-sexp
       "C-M-," #'sp-forward-barf-sexp
       "C-M-." #'sp-forward-slurp-sexp
-      "S-M-<up>" #'sp-raise-sexp
+      "S-M-<up>" #'raise-sexp
       "S-M-<down>" #'sp-splice-sexp
       ;; These *will* mess up terminal input.
       ;; Only activate them in GUI mode.
