@@ -237,6 +237,7 @@
             (start-process "terminal" nil exe (doom-project-root))
           (message (concat "No suitable terminal emulator found! "
                            "You can override this by setting 'user-terminal-emulator' manually.")))))
+(map! "M-<insert>" #'yank-from-kill-ring)
 
 ;; Elisp
 (map! "C-M-<return>" #'eros-eval-last-sexp)
