@@ -33,3 +33,6 @@
            (when (not (string-empty-p filename))
              (file-name-parent-directory filename)))))
     (setq +lua-lsp-dir lua-server-path)))
+
+;; MacOS specific bindings
+(map! "C-s-v" #'yank-from-kill-ring)
