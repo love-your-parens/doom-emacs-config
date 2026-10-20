@@ -284,6 +284,23 @@
       "C-<" #'writeroom-decrease-width)
 
 
+;;; Miscellany
+
+;; Style the Dashboard.
+(defun +dashboard-draw-ascii-banner-fn ()
+   "Return Doom's ASCII logo banner."
+   (concat
+    (propertize " ▨ READY" 'face '(:weight 'bold :height 1.5))
+    (propertize "\n" 'face '(:height 1.2))
+    (propertize (string-join '("eval, repeat" "") "\n")
+                'face '(:height 0.9))
+    (propertize "\n" 'face '(:height 1.0))))
+
+(custom-set-faces!
+  `(+dashboard-loaded :inherit 'font-lock-comment-face :height 0.9)
+  '(+dashboard-footer-icon :height 1.0))
+
+
 ;;; Useful snippets
 (comment
  ;; Here are some settings specific to workstation and environment,
