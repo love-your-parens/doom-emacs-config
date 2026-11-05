@@ -33,17 +33,16 @@
               (executable-find "alacritty")
               (executable-find "ghostty")))))
 
-;; Use absolute line numbers in insert mode, relative elsewhere.
-(add-hook! 'evil-insert-state-entry-hook
-  (when display-line-numbers (setq display-line-numbers t)))
-(add-hook! 'evil-insert-state-exit-hook
-  (when display-line-numbers (setq display-line-numbers 'relative)))
+;; Use relative line numbers by default.
+(setq-default display-line-numbers-type 'relative)
+;; Use absolute line numbers in insert mode, revert to buffer default on exit.
+(add-hook! 'evil-insert-state-entry-hook (when display-line-numbers (setq display-line-numbers t)))
+(add-hook! 'evil-insert-state-exit-hook (when display-line-numbers (setq display-line-numbers display-line-numbers-type)))
 ;; Disable line numbers in certain modes.
 (add-hook! '(vterm-mode-hook org-tree-slide-mode-hook) (setq display-line-numbers nil))
 ;; Disable line numbers in writeroom mode, but reactivate them on exit.
 (add-hook! 'writeroom-mode-enable-hook (display-line-numbers-mode -1))
-(add-hook! 'writeroom-mode-disable-hook (when display-line-numbers-type
-                                          (display-line-numbers-mode +1)))
+(add-hook! 'writeroom-mode-disable-hook (when display-line-numbers-type (display-line-numbers-mode +1)))
 
 ;; Dragging lines and regions with M-up/down.
 (drag-stuff-global-mode t)
